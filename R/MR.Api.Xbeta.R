@@ -1,10 +1,12 @@
-#' Ajusta modelos de regressão do tipo Api=Xbeta para uma única tabela r x s oriunda de um modelo multinomial ou produto de multinomiais
+#' Fit regression models as Api=Xbeta for a table r x s from multinomial model ou product of multinomials
 #' 
-#'@param result Objeto com o resultado da aplicação da função estima.theta 
-#'@param m.B Primeira matriz definidora do modelo de interesse
-#'@param m.X Segunda matriz definidora do modelo de interesse
-#'@return uma lista contendo vpc, vbeta, epbeta e mcovbeta
+#'@param result Object with result from function estima.theta 
+#'@param m.A First matrix that define the model 
+#'@param m.X Second matrix that define the model
+#'@return list with vpc, vbeta, epbeta e mcovbeta
 #'@export
+#'@import Matrix
+#'@import plotrix
 
 MR.Api.Xbeta<-function(result,m.A,m.X)
 {
@@ -22,14 +24,14 @@ MR.Api.Xbeta<-function(result,m.A,m.X)
   eQ <-t(vF-epl)%*%imcovF%*%(vF-epl)
   ngl<-nrow(m.X)-nrow(vbeta)
   epvalor<-1-pchisq(eQ,ngl)
-  cat("Est. dos par. beta","\n")
+  cat("Statistic from beta parameters","\n")
   print(round(cbind(vbeta,epbeta),2))
-  cat("Teste para a qualidade do ajuste do modelo = ",round(eQ,2),"\n")
-  cat("pvalor = ",round(epvalor,4),"\n")
+  cat("Test for goodness of fit =  ",round(eQ,2),"\n")
+  cat("p-value = ",round(epvalor,4),"\n")
   cat("g.l. =",ngl,"\n")
-  cat("Matriz A :","\n")
+  cat("Matrix A :","\n")
   print(m.A)
-  cat("Matriz X :","\n")
+  cat("Matrix X :","\n")
   print(m.X)
   result<- list(vpc=vpc,vbeta=vbeta,epbeta=epbeta,mcovbeta=mcovbeta,label=label)
   return(result)
