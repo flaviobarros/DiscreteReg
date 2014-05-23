@@ -1,13 +1,14 @@
-#'Estima os parâmetros de uma única tabela r x s oriunda de um modelo multinomial ou produto de multinomiais
+#'Estimate parameters of a table r x s from a multinomial model or a product of multinomials
 #' 
-#'LEMBRETE: A FUNÇÃO SEMPRE CONCATENA VERTICALMENTE AS LINHAS. ASSIM
-#'NO CASO DO MODELO PRODUTO DE MULTINOMIAIS, CADA LINHA DEVE REPRESENTAR
-#'UMA MULTINOMIAL
-#'@param tabela Uma tabela de contingência
-#'@param modelo 1 - multinomial, 2 - produto de multinomais
-#'@param gama Nível de confiança para a construção dos intervalos de confiança
-#'@return uma lista contendo vpc, epc, mIC e mcov
+#' WARNING: Each function concatenates lines. So, in the case of a product of multinomials, 
+#' each line must represent a multinomial
+#'@param tabela A contingency table
+#'@param modelo 1 - multinomial, 2 - multinomial product
+#'@param gama Confidence level to build confidence intervals 
+#'@return uma list with vpc, epc, mIC e mcov
 #'@export
+#'@import Matrix
+#'@import plotrix
 
 estima.theta <- function(tabela,modelo,gama)
 {
@@ -75,8 +76,8 @@ estima.theta <- function(tabela,modelo,gama)
   mIC[mIC[,2]>=1,2]=1
   m.result <-cbind(round(vpc,2),round(epc,2),round(mIC,2))
   rownames(m.result)<-label
-  colnames(m.result)<- c("Estimativa","EP","LIIC","LSIC")
-  cat("Estimativas:","\n")
+  colnames(m.result)<- c("Estimates","EP","LIIC","LSIC")
+  cat("Estimates:","\n")
   print(m.result)
   result<- list(vpc=vpc,epc=epc,mIC=mIC,mcov=mcov,label=label)
   return(result)

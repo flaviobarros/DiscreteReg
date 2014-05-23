@@ -1,9 +1,12 @@
-#' Estima proporções sob o modelo Api=Xbeta
+#' Estimate proportions under model Api=Xbeta
 #' 
-#'@param result Objeto com o o resultado da aplicação da função MR.Api.Xbeta
-#'@param m.H Matriz que recupera as proporções originais
-#'@param Vetor que recupera as proporções originais
+#'@param result Object with result from fucntion MR.Api.Xbeta
+#'@param m.H Matrix that returns original proportions
+#'@param v.F Vector that returns original proportions
+#'@param gama Confidence level
 #'@export
+#'@import Matrix
+#'@import plotrix
 
 estim.prp.ApiXbeta<-function(result,m.H,v.F,gama)
   
@@ -22,7 +25,7 @@ estim.prp.ApiXbeta<-function(result,m.H,v.F,gama)
   mIC[mIC[,1]<=0,1]=0
   mIC[mIC[,2]>=1,2]=1
   result<- list(vpesm=vpesm,vepsm=vepsm,mcovbeta=mcovbeta,mIC=mIC)
-  plot(vpc,axes=F,ylim=c(min(vpc,mIC),max(vpc,mIC)),xlab="categoria",ylab="proporções",cex=1.2)
+  plot(vpc,axes=F,ylim=c(min(vpc,mIC),max(vpc,mIC)),xlab="category",ylab="proportions",cex=1.2)
   plotCI(vpesm,ui=mIC[,2],li=mIC[,1],axes=F,pch=19,cex=1.2,cex.axis=1.2,cex.lab=1.2,add=T)
   axis(2,cex.axis=1.2) 
   axis(1,1:length(vpc),labels=label,cex.axis=1.2)
