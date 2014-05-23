@@ -1,11 +1,13 @@
-#' Ajusta modelos de regressão do tipo AlnGpi=Xbeta para uma única tabela r x s oriunda de um modelo multinomial ou produto de multinomiais
+#' Fit regression models as AlnGpi=Xbeta for a table r x s from a multinomial model or a product of multinomials
 #' 
-#'@param result Objeto com o o resultado da aplicação da função estima.theta
-#'@param m.B Matriz definidora do modelo de interesse
+#'@param result Object with result form function estima.theta
+#'@param m.A Matriz definidora do modelo de interesse
 #'@param m.G Matriz definidora do modelo de interesse
 #'@param m.X Matriz definidora do modelo de interesse
 #'@return uma lista contendo vpc, vbeta, epbeta e mcovbeta
 #'@export
+#'@import Matrix
+#'@import plotrix
 
 MR.AlnGpi.Xbeta<-function(result,m.A,m.G,m.X)
 {
@@ -34,14 +36,14 @@ MR.AlnGpi.Xbeta<-function(result,m.A,m.G,m.X)
   eQ <-t(vF-epl)%*%imcovF%*%(vF-epl)
   ngl<-nrow(m.X)-nrow(vbeta)
   epvalor<-1-pchisq(eQ,ngl)
-  cat("Est. dos par. beta","\n")
+  cat("Statistic from beta parameters","\n")
   print(round(cbind(vbeta,epbeta),2))
-  cat("Teste para a qualidade do ajuste do modelo = ",round(eQ,2),"\n")
-  cat("pvalor = ",round(epvalor,4),"\n")
+  cat("Test for goodness of fit =  ",round(eQ,2),"\n")
+  cat("p-value = ",round(epvalor,4),"\n")
   cat("g.l. =",ngl,"\n")
-  cat("Matriz A :","\n")
+  cat("Matrix A :","\n")
   print(m.A)
-  cat("Matriz X :","\n")
+  cat("Matrix X :","\n")
   print(m.X)
   result<- list(vpc=vpc,vbeta=vbeta,epbeta=epbeta,mcovbeta=mcovbeta,label=label)
   return(result)
