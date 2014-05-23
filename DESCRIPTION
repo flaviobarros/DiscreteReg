@@ -1,0 +1,13 @@
+Package: DiscreteReg
+Type: Package
+Title: Regression models with discrete data
+Version: 0.1
+Date: 2014-05-22
+Author: Caio Lucidius Naberezny Azevedo <canber@ime.unicamp.br>,
+        Flavio M. M. Barros <flaviomargarito@gmail.com>
+Maintainer: Flavio M. M. Barros <flaviomargarito@gmail.com>
+Description: Fit regression models with 
+License: GPLv3
+Depends: Matrix, plotrix
+
+

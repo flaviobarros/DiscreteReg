@@ -1,0 +1,10 @@
+exportPattern(estima.theta, 
+              plot.graf.prop, 
+              test.Bpi.D,
+              MR.Api.Xbeta,
+              estim.prp.ApiXbeta,
+              MR.AlnGpi.Xbeta,
+              )
+
+import(Matrix)
+import(plotrix)
