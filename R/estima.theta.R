@@ -5,12 +5,12 @@
 #'@param tabela A contingency table
 #'@param modelo 1 - multinomial, 2 - multinomial product
 #'@param gama Confidence level to build confidence intervals 
-#'@return uma list with vpc, epc, mIC e mcov
+#'@return uma List with vpc, epc, mIC e mcov
 #'@export
 #'@import Matrix
 #'@import plotrix
 
-estima.theta <- function(tabela,modelo,gama)
+estima.theta <- function(tabela, modelo, gama = 0.95)
 {
   auxl1 <- c(rownames(tabela))
   auxl2 <- c(colnames(tabela))
@@ -36,7 +36,7 @@ estima.theta <- function(tabela,modelo,gama)
     aux <- vpc%*%t(vpc)
     mcov <- matrix(as.numeric((as.matrix(Diagonal(ncat,vpc))- aux)/n),ncat,ncat)
     ep <- sqrt(diag(mcov))
-    epc<-cbind(ep)
+    epc <- cbind(ep)
   } 
   
   else if(modelo == 2)# produto de multinomias
