@@ -15,6 +15,13 @@ MR.Api.Xbeta<-function(result,m.A,m.X)
   mcov<-result$mcov
   mcov[mcov==0]<-0.000000000001
   mcovF <- m.A%*%mcov%*%t(m.A)
+  auxav <- eigen(mcovF,only.values=TRUE)$values
+  nlmcovF <- nrow(mcovF)
+  while(min(auxav) <= 0.000000001)
+  {
+    mcovF <- mcovF + diag(0.00001,nlmcovF,nlmcovF)
+    auxav <- eigen(mcovF,only.values=TRUE)$values
+  }
   imcovF <- solve(mcovF)
   vF <- m.A%*%vpc
   mcovbeta <- solve(t(m.X)%*%imcovF%*%m.X)
@@ -24,14 +31,9 @@ MR.Api.Xbeta<-function(result,m.A,m.X)
   eQ <-t(vF-epl)%*%imcovF%*%(vF-epl)
   ngl<-nrow(m.X)-nrow(vbeta)
   epvalor<-1-pchisq(eQ,ngl)
-  cat("Statistic from beta parameters","\n")
   print(round(cbind(vbeta,epbeta),2))
-  cat("Test for goodness of fit =  ",round(eQ,2),"\n")
-  cat("p-value = ",round(epvalor,4),"\n")
   cat("g.l. =",ngl,"\n")
-  cat("Matrix A :","\n")
   print(m.A)
-  cat("Matrix X :","\n")
   print(m.X)
   result<- list(vpc=vpc,vbeta=vbeta,epbeta=epbeta,mcovbeta=mcovbeta,label=label)
   return(result)
