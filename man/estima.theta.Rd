@@ -3,7 +3,7 @@
 \alias{estima.theta}
 \title{Estimate parameters of a table r x s from a multinomial model or a product of multinomials}
 \usage{
-estima.theta(tabela, modelo, gama)
+estima.theta(tabela, modelo, gama = 0.95)
 }
 \arguments{
 \item{tabela}{A contingency table}
@@ -13,7 +13,7 @@ estima.theta(tabela, modelo, gama)
 \item{gama}{Confidence level to build confidence intervals}
 }
 \value{
-uma list with vpc, epc, mIC e mcov
+uma List with vpc, epc, mIC e mcov
 }
 \description{
 WARNING: Each function concatenates lines. So, in the case of a product of multinomials,

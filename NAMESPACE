@@ -2,6 +2,8 @@
 
 export(MR.AlnGpi.Xbeta)
 export(MR.Api.Xbeta)
+export(envel_bino)
+export(envel_pois)
 export(estim.prp.ApiXbeta)
 export(estima.theta)
 export(plot_graf.prop)
